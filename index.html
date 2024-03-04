@@ -12,7 +12,17 @@
         margin: 0;
         padding: 0;
     }
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto 1fr; /* Mengatur kolom grid, auto untuk label dan a, 1fr untuk nilai */
+        grid-column-gap: 10px; /* Jarak antar kolom */
+        align-items: center; /* Posisi vertikal di tengah */
+    }
 
+    label, a, b {
+        margin: 5px 0; /* Jarak atas dan bawah */
+    }
+    
     .form-awal {
         width: 80%;
         margin: 0 auto;
@@ -111,6 +121,20 @@
         border: none;
         cursor: pointer;
     }
+    .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 9999;
+}
+
 </style>
 </head>
 <body>
@@ -163,15 +187,27 @@
       <p>Pada hari ini tanggal <span id="tanggal"></span>, saya <span id="NamaHRDResult"></span> selaku HRD Antares Group, dengan ini menyatakan bahwa saya telah menerima pegawai berikut sebagai bagian dari divisi <span id="DivisiResult"></span>. </p>
 
       <h3>Data Diri Lengkap :</h3>
-      <label for="nama">Nama Lengkap : <b><span id="NamaResult"></span></b></label>
+      <div class="grid-container">
+        <label for="nama">Nama Lengkap </label>
+        <a>:</a>
+        <b><span id="NamaResult"></span></b>
 
-      <label for="tempat-tanggal">Tempat, Tanggal Lahir : <b><span id="tempattanggalResult"></span></b></label>
+        <label for="tempat-tanggal">Tempat, Tanggal Lahir </label>
+        <a>:</a>
+        <b><span id="tempattanggalResult"></span></b>
 
-      <label for="alamat">Alamat : <b><span id="alamatResult"></span></b></label>
+        <label for="alamat">Alamat </label>
+        <a>:</a>
+        <b><span id="alamatResult"></span></b>
 
-      <label for="telepon">Nomor Telepon : <b><span id="teleponResult"></span></b></label>
+        <label for="telepon">Nomor Telepon </label>
+        <a>:</a>
+        <b><span id="teleponResult"></span></b>
 
-      <label for="ktp">Nomor ID CARD : <b><span id="ktpResult"></span></b></label>
+        <label for="ktp">Nomor ID CARD </label>
+        <a>:</a>
+        <b><span id="ktpResult"></span></b>
+    </div>
 
       <h3>Peraturan dan Syarat-syarat :</h3>
       <ul>
@@ -193,7 +229,7 @@
 </div>
 <br>
 <center>
-<button id="generate-btn" style="display: none;" class="generate-btn">Generate Image</button>
+<button id="generate-btn" style="display: none;" class="generate-btn">Download Image</button>
 </center>
 <br>
 <footer style="background-color: #333; color: white; padding: 20px; text-align: center;">
@@ -235,6 +271,18 @@ function generatePerjanjian() {
         	link.download = 'perjanjian-kerja-' + namaPekerja + '.png';
                 link.href = canvas.toDataURL();
                 link.click();
+
+                // Munculkan pop-up
+            var popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.innerHTML = '<img src="centang.gif" alt="Centang GIF"><p>Selamat bergabung di Antares Group!</p> <p>Pastikan untuk mengirim Perjanjian Kerja sesuai arahan HRD atau kirim ke HRD terkait ya jangan lupa.</p> <p>Good luck !</p>';
+            document.body.appendChild(popup);
+
+            // Hilangkan pop-up setelah beberapa detik
+            setTimeout(function() {
+                popup.remove();
+            }, 10000);
+
             }
         });
     });
