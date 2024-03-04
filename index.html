@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="HRD.png">
+<title>Perjanjian Kerja</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-awal {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+
+    .form-container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+    }
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 12px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 15px;
+      width: 15px;
+      background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      left: 3px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<img src="ANTARES.jpg" alt="ANTARES" width="200" height="200">
+<img align="right" src="HRD_LOGO.png" alt="HRD ANTARES" width="200" height="200">
+<form id="PerjanjianForm">
+  <div class="form-awal">  
+    <center>
+      <h2>Perjanjian Kerja</h2>
+    </center>
+    <p>ISI TERLEBIH DAHULU SESUAI INSTRUKSI HRD</p>
+      <label for="NamaHRD">Nama HRD:</label>
+      <input type="text" id="NamaHRD" name="NamaHRD" placeholder="Nama HRD">
+
+      <label for="divisi">Divisi:</label>
+        <select id="divisi" name="divisi">
+            <option value="">Pilih divisi</option>
+            <option value="RSD">RSD</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Builder">Builder</option>
+            <option value="Automotive">Automotive</option>
+        </select>
+
+      <label for="nama">Nama Lengkap:</label>
+      <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Lengkap">
+
+      <label for="tempat-tanggal">Tempat, Tanggal Lahir :</label>
+      <input type="text" id="tempat-tanggal" name="tempat-tanggal" placeholder="Masukkan Tempat, Tanggal Lahir">
+
+      <label for="alamat">Alamat :</label>
+      <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan Alamat"></textarea>
+
+      <label for="telepon">Nomor Telepon :</label>
+      <input type="number" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon">
+
+      <label for="ktp">Nomor ID CARD :</label>
+      <input type="text" id="ktp" name="ktp" placeholder="Nomor ID CARD">
+
+    <button type="button" onclick="generatePerjanjian()">Generate</button>
+ 
+  </div> 
+</form>
+
+<br>
+<div id="PerjanjianResult" style="display: none;">
+  <div class="form-container">
+  <center>
+      <h2>Perjanjian Kerja</h2>
+  </center>
+      <p>Pada hari ini tanggal <span id="tanggal"></span>, saya <span id="NamaHRDResult"></span> selaku HRD Antares Group, dengan ini menyatakan bahwa saya telah menerima pegawai berikut sebagai bagian dari divisi <span id="DivisiResult"></span>. </p>
+
+      <h3>Data Diri Lengkap :</h3>
+      <label for="nama">Nama Lengkap : <b><span id="NamaResult"></span></b></label>
+
+      <label for="tempat-tanggal">Tempat, Tanggal Lahir : <b><span id="tempattanggalResult"></span></b></label>
+
+      <label for="alamat">Alamat : <b><span id="alamatResult"></span></b></label>
+
+      <label for="telepon">Nomor Telepon : <b><span id="teleponResult"></span></b></label>
+
+      <label for="ktp">Nomor ID CARD : <b><span id="ktpResult"></span></b></label>
+
+      <h3>Peraturan dan Syarat-syarat :</h3>
+      <ul>
+    <li>1. Pekerja wajib mematuhi segala peraturan perusahaan yang berlaku.</li>
+    <li>2. Pekerja diharapkan untuk menjaga kerahasiaan informasi perusahaan.</li>
+    <li>3. Pekerja diwajibkan untuk mengikuti segala instruksi yang diberikan oleh atasan langsung.</li>
+    <li>4. Pekerja wajib memberikan pemberitahuan sebelum melakukan absen.</li>
+    <li>5. Pekerja diharapkan untuk berperilaku sopan dan tidak melakukan tindakan diskriminatif.</li>
+    <li>6. Pekerja diharapkan memberikan pemberitahuan sebelum mengundurkan diri sesuai dengan kebijakan perusahaan.</li>
+    <li>7. Segala hasil karya atau penemuan yang dihasilkan oleh pekerja selama bekerja di perusahaan dianggap sebagai kepemilikan perusahaan.</li>
+    <li>8. Pekerja dilarang untuk resign selama 1 bulan setelah diterima.</li>
+      </ul>
+      
+      <p>Dengan ini saya menyatakan bahwa, saya telah membaca, memahami, dan setuju untuk mematuhi semua peraturan dan syarat-syarat yang tercantum di atas, bila mana melanggar maka siap untuk diberikan konsekuensi yang berlaku.</p>
+      <label for="ttd">Tanda Tangan :</label>
+      <input type="text" id="ttd" name="ttd" placeholder="TTD,Signature Nama Lengkap">
+
+  </div>
+</div>
+<br>
+<center>
+<button id="generate-btn" style="display: none;" class="generate-btn">Generate Image</button>
+</center>
+<br>
+<script>
+function generatePerjanjian() {
+    const NamaHRDResult = document.getElementById('NamaHRD').value;
+    const DivisiResult = document.getElementById('divisi').value;
+    const NamaResult = document.getElementById('nama').value;
+    const tempattanggalResult = document.getElementById('tempat-tanggal').value;
+    const alamatResult = document.getElementById('alamat').value;
+    const teleponResult = document.getElementById('telepon').value;
+    const ktpResult = document.getElementById('ktp').value;
+    document.getElementById('NamaHRDResult').innerText = NamaHRDResult;
+    document.getElementById('DivisiResult').innerText = DivisiResult;
+    document.getElementById('NamaResult').innerText = NamaResult;
+    document.getElementById('tempattanggalResult').innerText = tempattanggalResult;
+    document.getElementById('alamatResult').innerText = alamatResult;
+    document.getElementById('teleponResult').innerText = teleponResult;
+    document.getElementById('ktpResult').innerText = ktpResult;
+
+    const PerjanjianResult = document.getElementById('PerjanjianResult');
+    PerjanjianResult.style.display = 'block';
+    PerjanjianResult.scrollIntoView({ behavior: 'smooth' });
+
+    const generateImg = document.querySelector('.generate-btn');
+    generateImg.style.display = 'block';
+}
+</script>
+
+<script>
+    document.getElementById('generate-btn').addEventListener('click', function() {
+        html2canvas(document.querySelector('.form-container'), {
+            onrendered: function(canvas) {
+                var link = document.createElement('a');
+        	var namaPekerja = document.getElementById('nama').value;
+        	link.download = 'perjanjian-kerja-' + namaPekerja + '.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            }
+        });
+    });
+</script>
+
+<!-- Script untuk html2canvas -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script>
+    const date = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('id-ID', options);
+    document.getElementById('tanggal').innerText = formattedDate;
+</script>
+</body>
+</html>
