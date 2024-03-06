@@ -177,6 +177,9 @@
       <label for="ktp">Nomor ID CARD :</label>
       <input type="text" id="ktp" name="ktp" placeholder="Nomor ID CARD">
 
+      <label for="ucp">(( UCP ))</label>
+      <input type="text" id="ucp" name="ucp" placeholder="Masukkan nama UCP">
+
     <button type="button" onclick="generatePerjanjian()">Generate</button>
  
   </div> 
@@ -228,6 +231,8 @@
       <p>Dengan ini saya menyatakan bahwa, saya telah membaca, memahami, dan setuju untuk mematuhi semua peraturan dan syarat-syarat yang tercantum di atas, bila mana melanggar maka siap untuk diberikan konsekuensi yang berlaku.</p>
       <label for="ttd">Tanda Tangan :</label>
       <input type="text" id="ttd" name="ttd" placeholder="TTD,Signature Nama Lengkap">
+      <br>
+      <p>(( <b><span id="ucpResult"></span></b> ))</p>
 
   </div>
 </div>
@@ -249,6 +254,7 @@ function generatePerjanjian() {
     const alamatResult = document.getElementById('alamat').value;
     const teleponResult = document.getElementById('telepon').value;
     const ktpResult = document.getElementById('ktp').value;
+    const ucpResult = document.getElementById('ucp').value;
     document.getElementById('NamaHRDResult').innerText = NamaHRDResult;
     document.getElementById('DivisiResult').innerText = DivisiResult;
     document.getElementById('NamaResult').innerText = NamaResult;
@@ -256,6 +262,7 @@ function generatePerjanjian() {
     document.getElementById('alamatResult').innerText = alamatResult;
     document.getElementById('teleponResult').innerText = teleponResult;
     document.getElementById('ktpResult').innerText = ktpResult;
+    document.getElementById('ucpResult').innerText = ucpResult;
 
     const PerjanjianResult = document.getElementById('PerjanjianResult');
     PerjanjianResult.style.display = 'block';
