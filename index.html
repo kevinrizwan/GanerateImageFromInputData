@@ -150,10 +150,10 @@
       <h2>Perjanjian Kerja</h2>
     </center>
     <p>ISI TERLEBIH DAHULU SESUAI INSTRUKSI HRD</p>
-      <label for="NamaHRD">Nama HRD:</label>
+      <label for="NamaHRD">Nama HRD <span style="color: red;">*</span> :</label>
       <input type="text" id="NamaHRD" name="NamaHRD" placeholder="Nama HRD">
 
-      <label for="divisi">Divisi:</label>
+      <label for="divisi">Divisi <span style="color: red;">*</span> :</label>
         <select id="divisi" name="divisi">
             <option value="">Pilih divisi</option>
             <option value="RSD">RSD</option>
@@ -162,22 +162,22 @@
             <option value="Automotive">Automotive</option>
         </select>
 
-      <label for="nama">Nama Lengkap:</label>
+      <label for="nama">Nama Lengkap <span style="color: red;">*</span> :</label>
       <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Lengkap">
 
-      <label for="tempat-tanggal">Tempat, Tanggal Lahir :</label>
+      <label for="tempat-tanggal">Tempat, Tanggal Lahir <span style="color: red;">*</span> :</label>
       <input type="text" id="tempat-tanggal" name="tempat-tanggal" placeholder="Masukkan Tempat, Tanggal Lahir">
 
-      <label for="alamat">Alamat :</label>
+      <label for="alamat">Alamat <span style="color: red;">*</span> :</label>
       <textarea id="alamat" name="alamat" rows="4" placeholder="Masukkan Alamat"></textarea>
 
-      <label for="telepon">Nomor Telepon :</label>
+      <label for="telepon">Nomor Telepon <span style="color: red;">*</span> :</label>
       <input type="number" id="telepon" name="telepon" placeholder="Masukkan Nomor Telepon">
 
-      <label for="ktp">Nomor ID CARD :</label>
+      <label for="ktp">Nomor ID CARD <span style="color: red;">*</span> :</label>
       <input type="text" id="ktp" name="ktp" placeholder="Nomor ID CARD">
 
-      <label for="ucp">(( UCP ))</label>
+      <label for="ucp">(( UCP )) <span style="color: red;">*</span> :</label>
       <input type="text" id="ucp" name="ucp" placeholder="Masukkan nama UCP">
 
     <button type="button" onclick="generatePerjanjian()">Generate</button>
@@ -255,6 +255,13 @@ function generatePerjanjian() {
     const teleponResult = document.getElementById('telepon').value;
     const ktpResult = document.getElementById('ktp').value;
     const ucpResult = document.getElementById('ucp').value;
+
+        // Lakukan validasi input
+        if (!NamaHRDResult || !DivisiResult || !NamaResult || !tempattanggalResult || !alamatResult || !teleponResult || !ktpResult || !ucpResult) {
+        alert('Mohon lengkapi semua data sebelum melanjutkan.');
+        return;
+    }
+
     document.getElementById('NamaHRDResult').innerText = NamaHRDResult;
     document.getElementById('DivisiResult').innerText = DivisiResult;
     document.getElementById('NamaResult').innerText = NamaResult;
@@ -304,7 +311,7 @@ function generatePerjanjian() {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script>
     const date = new Date();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const options = { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' };
     const formattedDate = date.toLocaleDateString('id-ID', options);
     document.getElementById('tanggal').innerText = formattedDate;
 </script>
